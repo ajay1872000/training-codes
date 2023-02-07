@@ -1,0 +1,37 @@
+#include<unistd.h>
+#include<pthread.h>
+#include<stdio.h>
+int a;
+void* mythread1(void *argv)
+{
+	int i,loop,local;
+	loop=*(int*)argv;
+	for(i=0;i<loop;i++)
+	{
+		local=a;
+		local++;
+		a=local;
+	}
+}
+void* mythread2(void *argv)
+{
+	int i,loop,local;
+	loop=*(int*)argv;
+	for(i=0;i<loop;i++)
+	{
+		local=a;
+		local++;
+		a=local;
+	}
+}
+void main()
+{
+	void *ret;
+	int res,loop=6000;
+	pthread_t t1,t2;
+	pthread_create(&t1,0,mythread1,&loop);
+	pthread_create(&t2,0,mythread2,&loop);
+	pthread_join(t1,&ret);
+	pthread_join(t2,&ret);
+	printf("\n%d",a);
+}

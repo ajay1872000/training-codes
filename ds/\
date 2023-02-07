@@ -1,0 +1,207 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+	int d;
+	struct node *p;};
+struct node *head=NULL;
+void addbeg(int n){
+	struct node *pt=(struct node*)malloc(1*sizeof(struct node));
+	if(pt==NULL)
+	{
+		printf("failed to allocate memory");
+		exit(1);}
+	pt->d=n;
+	pt->p=head;
+	head=pt;
+}
+void addlast(int n){
+	struct node *pt=(struct node*)malloc(1*sizeof(struct node));
+	struct node *ptr;
+	if(pt==NULL)
+	{
+		printf("failed to allocate memory");
+		exit(1);}
+	if(head==NULL)
+		head=pt;
+	else{
+		for(ptr=head;ptr->p!=NULL;ptr=ptr->p);
+	ptr->p=pt;}
+	pt->d=n;
+	pt->p=NULL;
+}
+
+void deletebeg(){
+	if(head==NULL){
+		printf("list is empty");
+		return;}
+	struct node *pt;
+	pt=head;
+	head=head->p;
+	free(pt);
+	printf("node is succesfullydeleted");
+}
+void display(){
+	if(head==NULL)
+	{
+		printf("list is empty");
+		return;}
+	struct node *pos=head;
+	while(pos!=NULL){
+		printf("%d\t",pos->d);
+		pos=pos->p;
+	}
+}
+int count(){
+	int c=0;
+	if(head==NULL)
+	{
+		printf("list is empty");
+		return 0;}
+	struct node *pos=head;
+	while(pos!=NULL){
+		c++;
+		pos=pos->p;
+	}return c;
+}
+void search(int n){
+	int i=0;
+	if(head==NULL)
+	{
+		printf("list is empty");
+		return ;}
+	struct node *pos=head;
+	while(pos!=NULL){
+		if(pos->d==n)
+		{
+			printf("element found at index %d at %p",i,&pos->d);
+			return ;}
+		pos=pos->p;
+		i++;
+	}
+	printf("element is not found");
+	return;
+}
+void deleteall(){
+	struct node *pt;
+	if(head==NULL)
+	{
+		printf("list is empty");
+		return;}
+	pt=head;
+	while(head!=NULL){
+		pt=head;
+		head=head->p;
+		free(pt);}
+	printf("succesfully deleted all elements");
+	
+}
+void deletelast(){
+	struct node *ptr,*t;
+	if(head==NULL)
+	{
+		printf("list is empty");
+		return;
+	}
+	else{if(head->p==NULL){
+		t=head;
+		head=t->p;;
+		free(t);}
+		else{
+		for(ptr=head;(ptr->p)->p!=NULL;ptr=head->p);
+		t=ptr->p;
+		ptr->p=t->p;
+		free(t);}}
+}
+
+void deletepartnode(int n)
+{struct node *ptr,*t;
+	int i;
+	for(ptr=head,i=2;i<n;ptr=ptr->p,i++)
+		printf("%d",i);
+	if(n==1){
+		t=head;
+		head=t->p;
+		free(t);}
+	else{
+		if((i==n)&&((ptr->p)!=NULL))
+		{
+			t=ptr->p;
+			ptr->p=t->p;
+			free(t);
+			printf("successfully %d  node",n);
+		}
+		else{
+			printf("no element found");
+		}
+	}
+}
+
+
+void addaftnode(int n,int m)
+{
+	struct node *t,*ptr;
+	if(head==NULL)
+	{
+		printf("list is empty");
+		return;}
+	t=head;
+	while(t!=NULL)
+	{
+		if(t->d==n){
+			ptr=(struct node *)malloc(1*sizeof(struct node));
+			if(ptr==NULL)
+			{
+				printf("failed to allocate memory");
+				exit(1);
+			}
+			ptr->d=n;
+			ptr->p=t->p;
+			t->p=ptr->p;
+			return;
+		}
+	}printf("element not found");
+}
+
+
+
+void main()
+{
+	int n,opt,m;
+	while(1){
+		printf("\nMenu\n--------------------------------------------------------------------------------------------------------------------------\n0.exit\n1.add at begining\n2.delete at begining\n3.display\n4.search\n5.no of elements present\n6.delete all\n7.add at last\n8.delete at last\n9.delete particular node\n10.add after node\n11.add before node");
+		scanf("%d",&opt);
+		switch(opt){
+			case 0:exit(0);
+			case 1:printf("enter a number");
+			       scanf("%d",&n);
+			       addbeg(n);break;
+			case 2:deletebeg();
+			       break;
+			case 3:display();
+			       break;
+			case 5:n=count();
+			       if(n)
+				       printf("%d elements are present in list",n);
+			       break;
+			case 4:if(head!=NULL){
+			       printf("enter search element");
+			       scanf("%d",&n);}
+			       search(n);break;
+			case 6:deleteall();break;
+			case 7:printf("enter a number");
+			       scanf("%d",&n);
+			       addlast(n);break;
+			case 8:deletelast();break;
+			case 9:printf("enter a value") at begin;
+			       scanf("%d",&n);
+			       deletepartnode(n);break;
+			case 10:if(head!=NULL){
+					printf("enter inputsa,b");
+					scanf("%d,%d",&n,&m);}
+				addaftnode(n,m);break;
+
+
+			default:printf("invalid case");
+		}
+	}
+}

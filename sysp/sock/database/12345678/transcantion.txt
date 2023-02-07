@@ -1,0 +1,6 @@
+credit amount:1000balance amount:1000 Mon Jan 30 14:16:35 2023
+
+debit amount:500balance amount:500 Mon Jan 30 14:16:41 2023
+
+debit amount:100balance amount:400 Mon Jan 30 14:16:58 2023
+

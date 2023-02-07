@@ -1,0 +1,1 @@
+cmd_/home/engineer/Desktop/c/kernel/basicdriver.mod := printf '%s\n'   basicdriver.o | awk '!x[$$0]++ { print("/home/engineer/Desktop/c/kernel/"$$0) }' > /home/engineer/Desktop/c/kernel/basicdriver.mod

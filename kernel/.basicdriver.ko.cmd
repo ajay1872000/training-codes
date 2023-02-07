@@ -1,0 +1,1 @@
+cmd_/home/engineer/Desktop/c/kernel/basicdriver.ko := ld -r  -m elf_x86_64  --build-id=sha1  -T scripts/module.lds -o /home/engineer/Desktop/c/kernel/basicdriver.ko /home/engineer/Desktop/c/kernel/basicdriver.o /home/engineer/Desktop/c/kernel/basicdriver.mod.o;  true
